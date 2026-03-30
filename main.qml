@@ -50,7 +50,7 @@ ApplicationWindow {
 
             //timers for fetching data-----------------------------
 
-            //1 sec timer
+            //date and time timer
             Timer {
                 interval: 1000
                 running: true
@@ -62,16 +62,15 @@ ApplicationWindow {
                 }
             }
 
-            //longer update timer
+            //api call timer
             Timer {
-                interval: 10000
+                interval: 60000
                 running: true
                 repeat: true
                 triggeredOnStart: true
                 onTriggered: {
                     backend.fetchEvents()
                     backend.fetchWeather()
-                    backend.loadPictures()
                 }
             }
 
@@ -314,6 +313,7 @@ ApplicationWindow {
                 repeat: true
                 triggeredOnStart: true
                 onTriggered: {
+                    backend.loadPictures()
                     if (backend.pictures.length > 0)
                         root.photoIndex = (root.photoIndex + 1) % backend.pictures.length
                     if (root.photoIndex > backend.pictures.length)
